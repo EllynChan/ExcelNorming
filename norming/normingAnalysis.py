@@ -14,7 +14,7 @@ import csv
 data = pd.read_csv('data.csv')
 
 #set up columns for writing csv
-header = ['Item Number','Arousal', 'Valence', 'Complexity', 'Pair Number', 'Relatedness']
+header = ['Item Number','Arousal', 'Valence', 'Complexity', 'Pleasantness', 'Pair Number', 'Relatedness']
 result = []
 item_number = 1
 relatedness = []
@@ -28,15 +28,15 @@ new_df = pd.DataFrame(df.mean())
 
 #record rows of csv data. Ranges are counted manually and need to change if the number of items in original csv changes
 #in this case, the pair 1 data is on row index 264
-for x in range(264,305,1):
+for x in range(356,397,1):
     relatedness.append(f'{new_df.iat[x,0]}') #add all pair relatedness to an array
 
-for x in range(0,263,3):
+for x in range(0,355,4):
     #store the data in the correct format
     if item_number < len(relatedness) + 1:
-        result.append([f'{item_number}', f'{new_df.iat[x,0]}', f'{new_df.iat[x+1,0]}', f'{new_df.iat[x+2,0]}', f'{pair_number}', relatedness[item_number - 1]])
+        result.append([f'{item_number}', f'{new_df.iat[x,0]}', f'{new_df.iat[x+1,0]}', f'{new_df.iat[x+2,0]}', f'{new_df.iat[x+3,0]}', f'{pair_number}', relatedness[item_number - 1]])
     else:
-        result.append([f'{item_number}', f'{new_df.iat[x,0]}', f'{new_df.iat[x+1,0]}', f'{new_df.iat[x+2,0]}'])
+        result.append([f'{item_number}', f'{new_df.iat[x,0]}', f'{new_df.iat[x+1,0]}', f'{new_df.iat[x+2,0]}', f'{new_df.iat[x+3,0]}'])
     item_number += 1
     pair_number += 1
 
